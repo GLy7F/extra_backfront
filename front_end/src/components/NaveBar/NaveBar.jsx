@@ -1,15 +1,20 @@
 import React, { Component } from 'react'
 import { Input, Menu } from 'semantic-ui-react'
+// import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router";
 
-export default class NaveBar extends Component {
+
+export class NaveBar extends Component {
   state = { activeItem: 'home' }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
     const { activeItem } = this.state
+console.log(this.props.hestory);
 
     return (
+
       <Menu secondary>
         <Menu.Item
           name='home'
@@ -40,3 +45,4 @@ export default class NaveBar extends Component {
     )
   }
 }
+export default withRouter(NaveBar)
