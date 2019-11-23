@@ -16,6 +16,7 @@ router.post('/register', (req, res) => {
         email: req.body.email,
         password: req.body.password,
     }
+    // new register
     User.findOne({
             email: req.body.email
         })
@@ -64,5 +65,13 @@ router.post('/login', (req, res) => {
         }).catch(err=> res.send(err))
 })
 
+// get user
+router.get('/profile',(req,res)=>{
+    var decoded =jwt.verify(req.body.token,'secret')
 
+    User.findById(decoded.user._id)
+    .then(user=> user? res.send(user) :res.send("token is not correct"))
+    .catch(err=> res.send(err))
+
+})
 module.exports = router
