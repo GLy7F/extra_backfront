@@ -46,6 +46,7 @@ router.post('/login', (req, res) => {
         .then(user => {
             if (user) {
                 if (bcrypt.compareSync(req.body.password, user.password)) {
+                    user.password= ""
                     var paylod = {
                         user
                     }
@@ -66,19 +67,19 @@ router.post('/login', (req, res) => {
 })
 
 // get user
-router.get('/profile', (req, res) => {
-    var decoded = jwt.verify(req.body.token, 'secret')
-    // postman method 
-    // get ( http://localhost:2550/users/profile )
-    //{
-    // "token":"token code" 
-    // } 
-    // ^ to see console.log decoded
+// router.get('/profile', (req, res) => {
+//     var decoded = jwt.verify(req.body.token, 'secret')
+//     // postman method 
+//     // get ( http://localhost:2550/users/profile )
+//     //{
+//     // "token":"token code" 
+//     // } 
+//     // ^ to see console.log decoded
 
-    // console.log(decoded);
-    User.findById(decoded.user._id)
-        .then(user => user ? res.send(user) : res.send("token is not correct"))
-        .catch(err => res.send(err))
+//     // console.log(decoded);
+//     User.findById(decoded.user._id)
+//         .then(user => user ? res.json(decoded.user) : res.send("token is not correct"))
+//         .catch(err => res.send(err))
 
-})
+// })
 module.exports = router
