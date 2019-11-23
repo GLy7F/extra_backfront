@@ -45,7 +45,7 @@ router.post('/login', (req, res) => {
         })
         .then(user => {
             if (user) {
-                if (bcrypt.compareSync( req.body.password,user.password)) {
+                if (bcrypt.compareSync(req.body.password, user.password)) {
                     var paylod = {
                         user
                     }
@@ -54,24 +54,31 @@ router.post('/login', (req, res) => {
                     })
                     res.send(token)
                 }
-                // if password not the =
+                // if password not  =
                 else {
                     res.send("password is not current")
                 }
-               
-                }  else {
-                    res.send("email is not found")
+
+            } else {
+                res.send("email is not found")
             }
-        }).catch(err=> res.send(err))
+        }).catch(err => res.send(err))
 })
 
 // get user
-router.get('/profile',(req,res)=>{
-    var decoded =jwt.verify(req.body.token,'secret')
+router.get('/profile', (req, res) => {
+    var decoded = jwt.verify(req.body.token, 'secret')
+    // postman method 
+    // get ( http://localhost:2550/users/profile )
+    //{
+    // "token":"token code" 
+    // } 
+    // ^ to see console.log decoded
 
+    // console.log(decoded);
     User.findById(decoded.user._id)
-    .then(user=> user? res.send(user) :res.send("token is not correct"))
-    .catch(err=> res.send(err))
+        .then(user => user ? res.send(user) : res.send("token is not correct"))
+        .catch(err => res.send(err))
 
 })
 module.exports = router
