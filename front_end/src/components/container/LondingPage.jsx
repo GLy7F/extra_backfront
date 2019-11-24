@@ -4,7 +4,9 @@ export default class LondingPage extends Component {
     render() {
         return (
             <div>
-                LondingPage
+                <h1>
+                    Welcom to Anas Page 
+                </h1>
             </div>
         )
     }

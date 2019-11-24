@@ -1,20 +1,27 @@
 import React, { Component } from 'react'
 import { Input, Menu } from 'semantic-ui-react'
-// import {withRouter} from "react-router-dom";
-import { withRouter } from "react-router";
+// import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from "react-router-dom";
 
 
-export class NaveBar extends Component {
+class NaveBar extends Component {
   state = { activeItem: 'home' }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = ((e, { name }) => {
+    this.setState({ activeItem: name })
+    if (name == "home"){
+      this.props.history.push(`/${name}`)
+
+    }else{
+      this.props.history.push(`/${name}`)
+
+    }
+    } )
 
   render() {
     const { activeItem } = this.state
-console.log(this.props.hestory);
 
     return (
-
       <Menu secondary>
         <Menu.Item
           name='home'
@@ -22,12 +29,12 @@ console.log(this.props.hestory);
           onClick={this.handleItemClick}
         />
         <Menu.Item
-          name='messages'
+          name='login'
           active={activeItem === 'messages'}
           onClick={this.handleItemClick}
         />
         <Menu.Item
-          name='friends'
+          name='register'
           active={activeItem === 'friends'}
           onClick={this.handleItemClick}
         />

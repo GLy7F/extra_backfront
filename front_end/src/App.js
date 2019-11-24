@@ -1,46 +1,35 @@
 import React, { Component } from 'react'
-import './App.css'
+import './App.css';
 import 'semantic-ui-css/semantic.min.css'
-import NaveBar from './components/NaveBar/NaveBar'
-import {Container} from 'semantic-ui-react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import NaveBar from './components/NaveBar/NaveBar.js';
+import { Container } from 'semantic-ui-react';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import LondingPage from './components/container/LondingPage'
-import  login  from './components/container/Login';
-import  Register  from './components/container/Register';
-import Profile  from './components/container/Profile';
+import Login from './components/container/Login'
+import Register from './components/container/Register'
+import Profile from './components/container/Profile'
 
 
-
-
-
-export default class App extends Component {
+class App extends Component {
   render() {
-    return (
-                   <Router>
-
-      <div>
-        <NaveBar/>
    
-            <Container className="main">
-<Switch>
-  <Route path='/' Component={LondingPage} />
-  <Route path='/login' Component={login} />
-  <Route path='/register' Component={Register} />
-  <Route path='/profile' Component={Profile} />
-     </Switch> 
-        </Container>   
     
-   
-
-
-      </div>
-             </Router>
-
+    return (
+      <Router>
+        <div className="App">
+          {/* <Navbar /> */}
+          <NaveBar />
+         
+          <Route exact path="/" component={LondingPage} />
+          <Container className="main" >
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/profile" component={Profile} />
+            </Container>
+          
+        </div>
+      </Router>
     )
   }
 }
+export default App
